@@ -1,19 +1,22 @@
-# Printing the list of students
+# Adding all students into an array
+students = [
+  "Dr. Hannibal Lecter"
+  "Darth Vader"
+  "Nurse Ratched"
+  "Michael Corleone"
+  "Alex DeLarge"
+  "The Wicked of the West"
+  "Terminator"
+  "Freddy Krueger"
+  "The Joker"
+  "Joeffrey Baratheon"
+  "Norman Bates"
+]
+# Printing students
 puts "The students of Villains Academy"
 puts "-------------"
-puts "Dr. Hannibal Lecter"
-puts "Darth Vader"
-puts "Nurse Ratched"
-puts "Michael Corleone"
-puts "Alex DeLarge"
-puts "The Wicked of the West"
-puts "Terminator"
-puts "Freddy Krueger"
-puts "The Joker"
-puts "Joeffrey Baratheon"
-puts "Norman Bates"
+students.each do |student|
+  puts student
+end
 # We print the total number of students
-print "Overall, we have "
-# We check the different behaviour of print VS puts
-print 11
-puts " great students"
+puts "Overall, we have #{students.count} great students"
