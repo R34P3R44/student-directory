@@ -4,21 +4,21 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
 
-  name = gets.chomp
+  name = STDIN.gets.chomp
   # while the name is not empty, repeat the code
   while !name.empty? do
     # Adding the student hash to the array
     @students << {name: name, cohort: :november}
     puts "Now we have #{@students.count} students"
     # Getting another name from the user
-    name = gets.chomp
+    name = STDIN.gets.chomp
   end
 end
 
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -32,7 +32,7 @@ end
 
 def show_students
   print_header
-  save_students
+  print_student_list
   print_footer
 end
 
@@ -53,6 +53,12 @@ def process(selection)
   end
 end
 
+def print_student_list
+  @students.each do |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+  end
+end
+
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
@@ -68,17 +74,31 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", 'r')
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
+  name, cohort = line.chomp.split(",")
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
 
+def try_load_students
+  filename = ARGV.first # Frist argument from CMD
+  return if filename.nil? # Exits method if none given
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filname}"
+  else
+    puts "sorry, #{filename} doesn't exists."
+    exit
+  end
+end
+
+
 def print_footer
   puts "Overall, we have #{@students.count} great students"
 end
 
+try_load_students
 interactive_menu
