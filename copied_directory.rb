@@ -9,8 +9,8 @@ def input_students
   while !name.empty? do
     # Adding the student hash to the array
     @students << {name: name, cohort: :november}
-    puts "Now we have #{@students.count} students"
-    # Getting another name from the user
+    puts "Now we have #{@students.count} student" if @students.count <= 1
+    puts "Now we have #{@students.count} students" if @students.count > 1
     name = STDIN.gets.chomp
   end
 end
